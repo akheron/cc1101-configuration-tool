@@ -242,7 +242,7 @@ export const App = () => {
 
   useEffect(() => {
     if (!ready) return;
-    saveToURL(state.getAllValues());
+    saveToURL(state.getAllValues(), true);
     setExportValue(exportText(state, onlyChanged));
   }, [state, version, onlyChanged, ready]);
 

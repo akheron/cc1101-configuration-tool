@@ -46,6 +46,20 @@ describe('import/export serialization', () => {
     expect(parsed[0x00]).toBe(enforced);
   });
 
+  it('filters unchanged registers from hash when requested', () => {
+    const values = {
+      0x03: RegisterTransforms.calculateResetValue(0x03), // unchanged
+      0x02: 0x2e, // changed
+    };
+    const hashAll = buildStateHash(values, false);
+    expect(hashAll).toContain('03:07'); // includes unchanged register
+    expect(hashAll).toContain('02:2e'); // includes changed register
+
+    const hashChanged = buildStateHash(values, true);
+    expect(hashChanged).not.toContain('03:07'); // excludes unchanged register
+    expect(hashChanged).toContain('02:2e'); // includes changed register
+  });
+
   it('exports and imports via RegisterState helpers', () => {
     const state = new RegisterState();
     state.initialize();

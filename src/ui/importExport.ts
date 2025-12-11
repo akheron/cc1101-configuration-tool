@@ -37,8 +37,9 @@ const hasChanged = (addr: number, values: RegisterValues) => {
   return values[addr] !== reset;
 };
 
-export function buildStateHash(values: RegisterValues): string {
+export function buildStateHash(values: RegisterValues, onlyChanged = false): string {
   const parts = Object.entries(values)
+    .filter(([addr]) => !onlyChanged || hasChanged(Number(addr), values))
     .sort((a, b) => Number(a[0]) - Number(b[0]))
     .map(
       ([addr, value]) =>
@@ -77,8 +78,8 @@ export function loadFromURL(state: RegisterState, hash: string): void {
   applyHashToState(state, hash);
 }
 
-export function saveToURL(values: RegisterValues): void {
-  const hash = buildStateHash(values);
+export function saveToURL(values: RegisterValues, onlyChanged = false): void {
+  const hash = buildStateHash(values, onlyChanged);
   history.replaceState(null, '', hash);
 }
 
