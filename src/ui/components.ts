@@ -168,7 +168,7 @@ export const RegisterCard = (state: RegisterState, register: RegisterDef = REGIS
     <section class="register-card" data-addr="${formatHex(register.addr)}">
       <header class="register-card__header">
         <div>
-          <div class="register-card__title">${register.name}</div>
+          <div class="register-card__title">${formatHex(register.addr)} ${register.name}</div>
           <div class="register-card__subtitle">${register.description}</div>
         </div>
         <div class="register-card__value">
