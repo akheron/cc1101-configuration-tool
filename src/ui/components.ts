@@ -43,38 +43,53 @@ const renderBitFieldControl = (
   const selected = isReadOnly && field.reset !== null ? field.reset : selectedRaw;
   const disabledAttr = isReadOnly ? 'disabled' : '';
   const groupName = `${register.addr}-${bits.replace(':', '_')}`;
+  const scrollKey = fieldConfig?.scrollKey
+    ? `${fieldConfig.scrollKey}-${register.addr}-${bits.replace(':', '_')}`
+    : undefined;
 
   if (options && options.length) {
     const optionsHtml = options
       .map(opt => {
+        const inputId = `opt-${groupName}-${opt.value}`;
         const valueText = fieldConfig?.valueFormatter
           ? fieldConfig.valueFormatter(opt)
           : `${opt.value} (${opt.value.toString(2).padStart(width, '0')})`;
-        const descText = opt.desc ? `<div class="bitfield-option__desc">${opt.desc}</div>` : '';
+        const descText = opt.desc
+          ? `<span class="bitfield-option__desc">${opt.desc}</span>`
+          : `<span class="bitfield-option__desc bitfield-option__desc--empty">—</span>`;
         return `
-          <label class="bitfield-option">
-            <input
-              type="radio"
-              data-type="field-radio"
-              name="${groupName}"
-              data-addr="${register.addr}"
-              data-bits="${bits}"
-              value="${opt.value}"
-              ${opt.value === selected ? 'checked' : ''}
-              ${disabledAttr}
-            />
-            <div class="bitfield-option__label">
-              <div class="bitfield-option__value">${valueText}</div>
+          <tr class="bitfield-row ${opt.value === selected ? 'is-selected' : ''}">
+            <td class="bitfield-row__value">
+              <label class="bitfield-row__label" for="${inputId}">
+                <input
+                  id="${inputId}"
+                  type="radio"
+                  data-type="field-radio"
+                  name="${groupName}"
+                  data-addr="${register.addr}"
+                  data-bits="${bits}"
+                  value="${opt.value}"
+                  ${opt.value === selected ? 'checked' : ''}
+                  ${disabledAttr}
+                />
+                <span class="bitfield-option__value">${valueText}</span>
+              </label>
+            </td>
+            <td class="bitfield-row__desc">
               ${descText}
-            </div>
-          </label>
+            </td>
+          </tr>
         `;
       })
       .join('');
 
     return `
-      <div class="bitfield-options" ${fieldConfig?.scrollKey ? `data-scroll-key="${fieldConfig.scrollKey}"` : ''}>
-        ${optionsHtml}
+      <div class="bitfield-options bitfield-options--table" ${scrollKey ? `data-scroll-key="${scrollKey}"` : ''}>
+        <table class="bitfield-table" role="presentation">
+          <tbody>
+            ${optionsHtml}
+          </tbody>
+        </table>
       </div>
     `;
   }

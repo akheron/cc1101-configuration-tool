@@ -294,26 +294,6 @@ p {
   padding-right: 6px;
 }
 
-.bitfield-option {
-  display: flex;
-  gap: 8px;
-  align-items: flex-start;
-  padding: 6px 8px;
-  border: 1px solid #e4e9ef;
-  border-radius: 6px;
-  background: #fff;
-}
-
-.bitfield-option input[type='radio'] {
-  margin-top: 4px;
-}
-
-.bitfield-option__label {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
 .bitfield-option__value {
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
   font-weight: 600;
@@ -322,6 +302,77 @@ p {
 .bitfield-option__desc {
   font-size: 12px;
   color: #4b5563;
+}
+
+/* Table-style radio list */
+.bitfield-options--table {
+  padding-right: 0;
+  max-height: none;
+  overflow: visible;
+}
+
+.bitfield-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 13px;
+}
+
+.bitfield-row td {
+  border: 1px solid #e4e9ef;
+  border-top: none;
+  background: #fff;
+  vertical-align: top;
+}
+
+.bitfield-row {
+  cursor: pointer;
+}
+
+.bitfield-row:first-child td {
+  border-top: 1px solid #e4e9ef;
+}
+
+.bitfield-row.is-selected td {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.bitfield-row:hover td {
+  background: #f3f6fb;
+}
+
+.bitfield-row__value {
+  width: 1%;
+  white-space: nowrap;
+  padding: 6px 8px;
+}
+
+.bitfield-row__desc {
+  padding: 6px 8px;
+}
+
+.bitfield-row__desc .bitfield-option__desc {
+  display: inline-block;
+}
+
+.bitfield-row__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.bitfield-row__label input[type='radio'] {
+  margin: 0;
+}
+
+.bitfield-option__value {
+  font-size: 13px;
+}
+
+.bitfield-option__desc--empty {
+  color: #9ca3af;
 }
 
 .bitfield-control {

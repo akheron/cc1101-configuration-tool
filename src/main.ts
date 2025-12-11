@@ -36,6 +36,7 @@ state.subscribe(change => {
 });
 
 eventManager.bind();
+domUpdater.scrollInitialSelectionsIntoView();
 
 // Initial summary render
 const summaryEl = app.querySelector<HTMLElement>('#summary');

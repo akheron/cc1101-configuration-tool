@@ -115,6 +115,14 @@ export class EventManager {
       }
     }
 
+    const bitfieldRow = target.closest<HTMLTableRowElement>('.bitfield-row');
+    if (bitfieldRow && !target.closest('label') && !target.closest('input[type="radio"]')) {
+      const radio = bitfieldRow.querySelector<HTMLInputElement>('input[type="radio"][data-type="field-radio"]');
+      if (radio && !radio.disabled) {
+        radio.click();
+      }
+    }
+
     const scrollTarget = target.closest('[data-scroll-to]') as HTMLElement | null;
     if (scrollTarget) {
       const addrHex = scrollTarget.dataset.scrollTo;
