@@ -23,11 +23,10 @@ export const useRegisterState = (): UseRegisterStateResult => {
     if (!state) return;
     state.initialize();
     setReady(true);
-    setVersion(v => v + 1);
-    const unsub = state.subscribe(() => setVersion(v => v + 1));
+    setVersion((v) => v + 1);
+    const unsub = state.subscribe(() => setVersion((v) => v + 1));
     return () => unsub?.();
   }, []);
 
   return { state: stateRef.current!, version, ready };
 };
-

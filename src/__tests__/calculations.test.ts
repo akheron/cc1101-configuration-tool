@@ -20,7 +20,7 @@ describe('RegisterCalculations', () => {
       defaults[0x0d],
       defaults[0x0e],
       defaults[0x0f],
-      crystalFreqMHz
+      crystalFreqMHz,
     );
     expect(Math.abs(baseFreq - 800_000_000)).toBeLessThan(200);
   });
@@ -41,11 +41,14 @@ describe('RegisterCalculations', () => {
       defaults[0x0d],
       defaults[0x0e],
       defaults[0x0f],
-      crystalFreqMHz
+      crystalFreqMHz,
     );
     const spacing = RegisterCalculations.channelSpacing(defaults, crystalFreqMHz);
     const expected = base + spacing * 10;
-    expect(RegisterCalculations.carrierFrequency(defaults, crystalFreqMHz)).toBeCloseTo(expected, 5);
+    expect(RegisterCalculations.carrierFrequency(defaults, crystalFreqMHz)).toBeCloseTo(
+      expected,
+      5,
+    );
   });
 
   it('maps PATABLE[0] to dBm for 868 vs 915 MHz tables', () => {

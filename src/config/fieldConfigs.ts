@@ -30,7 +30,7 @@ import {
   SYNC_MODE_OPTIONS,
   TXOFF_MODE_OPTIONS,
   WAIT_TIME_OPTIONS,
-  WOR_RES_OPTIONS
+  WOR_RES_OPTIONS,
 } from '../data/options';
 import { RegisterCalculations } from '../logic/calculations';
 import { FieldConfigMap, Option, RegisterValues } from '../types/register';
@@ -61,138 +61,138 @@ export const FIELD_CONFIGS: FieldConfigMap = {
   'GDO0_CFG[5:0]': {
     options: GDO_CFG_OPTIONS,
     scrollKey: 'gdo',
-    valueFormatter: formatHexOption
+    valueFormatter: formatHexOption,
   },
   'GDO1_CFG[5:0]': {
     options: GDO_CFG_OPTIONS,
     scrollKey: 'gdo',
-    valueFormatter: formatHexOption
+    valueFormatter: formatHexOption,
   },
   'GDO2_CFG[5:0]': {
     options: GDO_CFG_OPTIONS,
     scrollKey: 'gdo',
-    valueFormatter: formatHexOption
+    valueFormatter: formatHexOption,
   },
   'FIFO_THR[3:0]': {
     options: FIFO_THR_OPTIONS,
-    scrollKey: 'fifo_thr'
+    scrollKey: 'fifo_thr',
   },
   'CLOSE_IN_RX[1:0]': {
     options: CLOSE_IN_RX_OPTIONS,
-    scrollKey: 'close_in_rx'
+    scrollKey: 'close_in_rx',
   },
   'ADR_CHK[1:0]': {
     options: ADR_CHK_OPTIONS,
-    scrollKey: 'adr_chk'
+    scrollKey: 'adr_chk',
   },
   'PKT_FORMAT[1:0]': {
     options: PKT_FORMAT_OPTIONS,
-    scrollKey: 'pkt_format'
+    scrollKey: 'pkt_format',
   },
   'LENGTH_CONFIG[1:0]': {
     options: LENGTH_CONFIG_OPTIONS,
-    scrollKey: 'length_config'
+    scrollKey: 'length_config',
   },
   'MOD_FORMAT[2:0]': {
     options: MOD_FORMAT_OPTIONS,
-    scrollKey: 'mod_format'
+    scrollKey: 'mod_format',
   },
   'SYNC_MODE[2:0]': {
     options: SYNC_MODE_OPTIONS,
-    scrollKey: 'sync_mode'
+    scrollKey: 'sync_mode',
   },
   'NUM_PREAMBLE[2:0]': {
     options: NUM_PREAMBLE_OPTIONS,
-    scrollKey: 'num_preamble'
+    scrollKey: 'num_preamble',
   },
   'CCA_MODE[1:0]': {
     options: CCA_MODE_OPTIONS,
-    scrollKey: 'cca_mode'
+    scrollKey: 'cca_mode',
   },
   'RXOFF_MODE[1:0]': {
     options: RXOFF_MODE_OPTIONS,
-    scrollKey: 'rxoff_mode'
+    scrollKey: 'rxoff_mode',
   },
   'TXOFF_MODE[1:0]': {
     options: TXOFF_MODE_OPTIONS,
-    scrollKey: 'txoff_mode'
+    scrollKey: 'txoff_mode',
   },
   'FS_AUTOCAL[1:0]': {
     options: FS_AUTOCAL_OPTIONS,
-    scrollKey: 'fs_autocal'
+    scrollKey: 'fs_autocal',
   },
   'PO_TIMEOUT[1:0]': {
     options: PO_TIMEOUT_OPTIONS,
-    scrollKey: 'po_timeout'
+    scrollKey: 'po_timeout',
   },
   'FOC_PRE_K[1:0]': {
     options: FOC_PRE_K_OPTIONS,
-    scrollKey: 'foc_pre_k'
+    scrollKey: 'foc_pre_k',
   },
   'FOC_LIMIT[1:0]': {
     options: FOC_LIMIT_OPTIONS,
-    scrollKey: 'foc_limit'
+    scrollKey: 'foc_limit',
   },
   'BS_PRE_KI[1:0]': {
     options: BS_PRE_KI_OPTIONS,
-    scrollKey: 'bs_pre_ki'
+    scrollKey: 'bs_pre_ki',
   },
   'BS_PRE_KP[1:0]': {
     options: BS_PRE_KP_OPTIONS,
-    scrollKey: 'bs_pre_kp'
+    scrollKey: 'bs_pre_kp',
   },
   'BS_LIMIT[1:0]': {
     options: BS_LIMIT_OPTIONS,
-    scrollKey: 'bs_limit'
+    scrollKey: 'bs_limit',
   },
   'MAX_DVGA_GAIN[1:0]': {
     options: MAX_DVGA_GAIN_OPTIONS,
-    scrollKey: 'max_dvga_gain'
+    scrollKey: 'max_dvga_gain',
   },
   'MAX_LNA_GAIN[2:0]': {
     options: MAX_LNA_GAIN_OPTIONS,
-    scrollKey: 'max_lna_gain'
+    scrollKey: 'max_lna_gain',
   },
   'MAGN_TARGET[2:0]': {
     options: MAGN_TARGET_OPTIONS,
-    scrollKey: 'magn_target'
+    scrollKey: 'magn_target',
   },
   'CARRIER_SENSE_REL_THR[1:0]': {
     options: CARRIER_SENSE_REL_THR_OPTIONS,
-    scrollKey: 'carrier_sense_rel_thr'
+    scrollKey: 'carrier_sense_rel_thr',
   },
   'CARRIER_SENSE_ABS_THR[3:0]': {
     options: CARRIER_SENSE_ABS_THR_OPTIONS,
     scrollKey: 'carrier_sense_abs_thr',
-    valueFormatter: formatCarrierSenseAbs
+    valueFormatter: formatCarrierSenseAbs,
   },
   'HYST_LEVEL[1:0]': {
     options: HYST_LEVEL_OPTIONS,
-    scrollKey: 'hyst_level'
+    scrollKey: 'hyst_level',
   },
   'WAIT_TIME[1:0]': {
     options: WAIT_TIME_OPTIONS,
-    scrollKey: 'wait_time'
+    scrollKey: 'wait_time',
   },
   'AGC_FREEZE[1:0]': {
     options: AGC_FREEZE_OPTIONS,
-    scrollKey: 'agc_freeze'
+    scrollKey: 'agc_freeze',
   },
   'FILTER_LENGTH[1:0]': {
     options: FILTER_LENGTH_OPTIONS,
-    scrollKey: 'filter_length'
+    scrollKey: 'filter_length',
   },
   'EVENT1[2:0]': {
     options: EVENT1_OPTIONS,
-    scrollKey: 'event1'
+    scrollKey: 'event1',
   },
   'WOR_RES[1:0]': {
     options: WOR_RES_OPTIONS,
-    scrollKey: 'wor_res'
+    scrollKey: 'wor_res',
   },
   'PATABLE[0]': {
     getOptions: resolvePatable,
     scrollKey: 'patable',
-    valueFormatter: formatHexOption
-  }
+    valueFormatter: formatHexOption,
+  },
 };

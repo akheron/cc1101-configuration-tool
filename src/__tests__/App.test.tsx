@@ -19,8 +19,10 @@ describe('App', () => {
 
     const channelInput = await waitFor(
       () =>
-        container.querySelector<HTMLInputElement>('input[data-type="register-hex"][data-addr="10"]'),
-      { timeout: 2000 }
+        container.querySelector<HTMLInputElement>(
+          'input[data-type="register-hex"][data-addr="10"]',
+        ),
+      { timeout: 2000 },
     );
     expect(channelInput).not.toBeNull();
 
@@ -28,9 +30,8 @@ describe('App', () => {
 
     const channelSummary = await waitFor(
       () => container.querySelector<HTMLElement>('[data-scroll-to="0x09"] strong'),
-      { timeout: 2000 }
+      { timeout: 2000 },
     );
     expect(channelSummary?.textContent?.trim()).toBe('5');
   });
 });
-

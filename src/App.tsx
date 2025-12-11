@@ -8,7 +8,8 @@ import { RegisterDef } from './types/register';
 import { exportText, importText, loadFromURL, saveToURL } from './ui/importExport';
 import { BitFieldControl, applyFieldValue } from './ui/react/BitFieldControl';
 
-const formatHex = (value: number, width = 2) => `0x${value.toString(16).padStart(width, '0').toUpperCase()}`;
+const formatHex = (value: number, width = 2) =>
+  `0x${value.toString(16).padStart(width, '0').toUpperCase()}`;
 
 const formatHz = (hz: number): string => {
   if (hz >= 1e9) return `${(hz / 1e9).toFixed(3)} GHz`;
@@ -36,7 +37,13 @@ const extractField = (value: number, bits: string): number => {
   return (value >> min) & ((1 << width) - 1);
 };
 
-const Summary = ({ state, onScrollTo }: { state: RegisterState; onScrollTo: (addr: number) => void }) => {
+const Summary = ({
+  state,
+  onScrollTo,
+}: {
+  state: RegisterState;
+  onScrollTo: (addr: number) => void;
+}) => {
   const summaryItems = [
     { label: 'Base Frequency', value: formatHz(state.getBaseFrequency()), addr: 0x0d },
     { label: 'Channel Spacing', value: formatHz(state.getChannelSpacing()), addr: 0x10 },
@@ -46,17 +53,17 @@ const Summary = ({ state, onScrollTo }: { state: RegisterState; onScrollTo: (add
     {
       label: 'TX Power',
       value: state.getTxPowerDbm() !== null ? `${state.getTxPowerDbm()} dBm` : '—',
-      addr: 0x3e
+      addr: 0x3e,
     },
     { label: 'After RX', value: state.getStateAfterRX(), addr: 0x17 },
     { label: 'After TX', value: state.getStateAfterTX(), addr: 0x17 },
     { label: 'GDO0', value: state.getGDO0Behavior(), addr: 0x02 },
-    { label: 'GDO2', value: state.getGDO2Behavior(), addr: 0x00 }
+    { label: 'GDO2', value: state.getGDO2Behavior(), addr: 0x00 },
   ];
 
   return (
     <div className="summary-grid">
-      {summaryItems.map(item => (
+      {summaryItems.map((item) => (
         <div
           key={item.label}
           className="summary-item"
@@ -84,10 +91,7 @@ const RegisterCard = ({ register, state, onFieldChange, onResetRegister }: Regis
   const isRegisterReset = value === resetValue;
 
   return (
-    <section
-      className="register-card"
-      data-addr={formatHex(register.addr)}
-    >
+    <section className="register-card" data-addr={formatHex(register.addr)}>
       <header className="register-card__header">
         <div>
           <div className="register-card__title">
@@ -102,7 +106,7 @@ const RegisterCard = ({ register, state, onFieldChange, onResetRegister }: Regis
               data-type="register-hex"
               data-addr={register.addr}
               value={formatHex(value)}
-              onChange={event => {
+              onChange={(event) => {
                 const parsed = parseHexInput(event.target.value);
                 if (parsed === null) return;
                 let next = RegisterTransforms.ensureFIFOTHRBit7Cleared(register.addr, parsed);
@@ -114,7 +118,8 @@ const RegisterCard = ({ register, state, onFieldChange, onResetRegister }: Regis
           <div className="register-card__binary">{`${value.toString(2).padStart(8, '0')}b`}</div>
           <div className="register-card__reset">
             <span>
-              Reset: {formatHex(resetValue)} {isRegisterReset ? <span className="register-card__reset-match">✓</span> : null}
+              Reset: {formatHex(resetValue)}{' '}
+              {isRegisterReset ? <span className="register-card__reset-match">✓</span> : null}
             </span>
             <button
               className="btn btn-ghost"
@@ -128,8 +133,10 @@ const RegisterCard = ({ register, state, onFieldChange, onResetRegister }: Regis
         </div>
       </header>
       <div className="register-card__fields">
-        {register.bitFields.map(field => {
-          const isReset = field.reset !== null && extractField(state.getValue(register.addr), field.bits) === field.reset;
+        {register.bitFields.map((field) => {
+          const isReset =
+            field.reset !== null &&
+            extractField(state.getValue(register.addr), field.bits) === field.reset;
           const resetInfo =
             field.reset !== null ? (
               <>
@@ -140,7 +147,11 @@ const RegisterCard = ({ register, state, onFieldChange, onResetRegister }: Regis
               'reset: —'
             );
           return (
-            <div className={`bitfield ${field.rw === 'R' ? ' bitfield--readonly' : ''}`} data-bits={field.bits} key={field.bits}>
+            <div
+              className={`bitfield ${field.rw === 'R' ? ' bitfield--readonly' : ''}`}
+              data-bits={field.bits}
+              key={field.bits}
+            >
               <div className="bitfield__header">
                 <div className="bitfield__title">
                   <span className="bitfield__name">{field.name || 'Reserved'}</span>
@@ -179,7 +190,13 @@ type RegisterListProps = {
   onRegisterRef: (addr: number, el: HTMLDivElement | null) => void;
 };
 
-const RegisterList = ({ state, filterTerm, onFieldChange, onResetRegister, onRegisterRef }: RegisterListProps) => {
+const RegisterList = ({
+  state,
+  filterTerm,
+  onFieldChange,
+  onResetRegister,
+  onRegisterRef,
+}: RegisterListProps) => {
   const term = filterTerm.trim().toLowerCase();
   const matches = (reg: RegisterDef) => {
     if (!term) return true;
@@ -193,8 +210,8 @@ const RegisterList = ({ state, filterTerm, onFieldChange, onResetRegister, onReg
 
   return (
     <>
-      {REGISTERS.filter(matches).map(reg => (
-        <div key={reg.addr} ref={el => onRegisterRef(reg.addr, el)}>
+      {REGISTERS.filter(matches).map((reg) => (
+        <div key={reg.addr} ref={(el) => onRegisterRef(reg.addr, el)}>
           <RegisterCard
             register={reg}
             state={state}
@@ -292,7 +309,7 @@ export const App = () => {
               data-type="register-search"
               placeholder="Name, addr, description"
               value={filterTerm}
-              onChange={event => setFilterTerm(event.target.value)}
+              onChange={(event) => setFilterTerm(event.target.value)}
             />
           </label>
         </div>
@@ -303,7 +320,7 @@ export const App = () => {
               id="crystalFreq"
               data-type="crystal-select"
               value={state.getCrystalFreq()}
-              onChange={event => state.setCrystalFreq(Number(event.target.value))}
+              onChange={(event) => state.setCrystalFreq(Number(event.target.value))}
             >
               <option value="26">26</option>
               <option value="27">27</option>
@@ -322,7 +339,7 @@ export const App = () => {
                 id="exportOnlyChanged"
                 data-type="export-changed"
                 checked={onlyChanged}
-                onChange={event => setOnlyChanged(event.target.checked)}
+                onChange={(event) => setOnlyChanged(event.target.checked)}
               />
               Only changed
             </label>
@@ -353,7 +370,7 @@ export const App = () => {
             id="importText"
             placeholder="(0x00, 0x29), // IOCFG2"
             value={importValue}
-            onChange={event => setImportValue(event.target.value)}
+            onChange={(event) => setImportValue(event.target.value)}
           />
           <div className="panel-actions">
             <button

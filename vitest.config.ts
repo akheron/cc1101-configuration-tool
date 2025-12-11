@@ -6,6 +6,6 @@ export default defineConfig({
     globals: true,
     include: ['src/__tests__/**/*.{test,spec}.{ts,tsx}'],
     exclude: ['tests/e2e/**', 'playwright.config.ts', '**/node_modules/**'],
-    setupFiles: ['./src/setupTests.ts']
-  }
+    setupFiles: ['./src/setupTests.ts'],
+  },
 });

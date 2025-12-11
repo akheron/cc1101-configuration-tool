@@ -5,7 +5,8 @@ import { extractBitField, setBitField } from '../../logic/bitFields';
 import { RegisterState } from '../../state/registerState';
 import { BitField, FieldConfig, Option, RegisterDef } from '../../types/register';
 
-const formatHex = (value: number, width = 2) => `0x${value.toString(16).padStart(width, '0').toUpperCase()}`;
+const formatHex = (value: number, width = 2) =>
+  `0x${value.toString(16).padStart(width, '0').toUpperCase()}`;
 
 const getFieldWidth = (bits: string): number => {
   const range = bits.split(':').map(Number);
@@ -13,7 +14,10 @@ const getFieldWidth = (bits: string): number => {
   return Math.abs(range[0] - range[1]) + 1;
 };
 
-const resolveOptions = (fieldConfig: FieldConfig | undefined, state: RegisterState): Option[] | undefined => {
+const resolveOptions = (
+  fieldConfig: FieldConfig | undefined,
+  state: RegisterState,
+): Option[] | undefined => {
   if (!fieldConfig) return undefined;
   if (fieldConfig.getOptions) {
     return fieldConfig.getOptions(state.getAllValues(), state.getCrystalFreq());
@@ -24,8 +28,11 @@ const resolveOptions = (fieldConfig: FieldConfig | undefined, state: RegisterSta
   return fieldConfig.options;
 };
 
-export const applyFieldValue = (currentValue: number, bits: string, newFieldValue: number): number =>
-  setBitField(currentValue, bits, newFieldValue) & 0xff;
+export const applyFieldValue = (
+  currentValue: number,
+  bits: string,
+  newFieldValue: number,
+): number => setBitField(currentValue, bits, newFieldValue) & 0xff;
 
 type Props = {
   state: RegisterState;
@@ -75,7 +82,7 @@ export const BitFieldControl = ({ state, register, field, currentValue, onFieldC
       >
         <table className="bitfield-table" role="presentation">
           <tbody>
-            {options.map(opt => {
+            {options.map((opt) => {
               const inputId = `opt-${groupName}-${opt.value}`;
               const valueText = FIELD_CONFIGS[field.name]?.valueFormatter
                 ? FIELD_CONFIGS[field.name]?.valueFormatter?.(opt)
@@ -85,8 +92,12 @@ export const BitFieldControl = ({ state, register, field, currentValue, onFieldC
                 <tr
                   key={inputId}
                   className={`bitfield-row ${opt.value === selected ? 'is-selected' : ''}`}
-                  onClick={e => {
-                    if ((e.target as HTMLElement).closest('label') || (e.target as HTMLElement).closest('input')) return;
+                  onClick={(e) => {
+                    if (
+                      (e.target as HTMLElement).closest('label') ||
+                      (e.target as HTMLElement).closest('input')
+                    )
+                      return;
                     if (!disabled) onFieldChange(register.addr, field.bits, opt.value);
                   }}
                 >
@@ -108,7 +119,9 @@ export const BitFieldControl = ({ state, register, field, currentValue, onFieldC
                     </label>
                   </td>
                   <td className="bitfield-row__desc">
-                    <span className={`bitfield-option__desc ${opt.desc ? '' : 'bitfield-option__desc--empty'}`}>
+                    <span
+                      className={`bitfield-option__desc ${opt.desc ? '' : 'bitfield-option__desc--empty'}`}
+                    >
                       {descText}
                     </span>
                   </td>
@@ -131,8 +144,12 @@ export const BitFieldControl = ({ state, register, field, currentValue, onFieldC
           data-bits={field.bits}
           checked={selected === 1}
           disabled={disabled}
-          onChange={event =>
-            onFieldChange(register.addr, field.bits, (event.target as HTMLInputElement).checked ? 1 : 0)
+          onChange={(event) =>
+            onFieldChange(
+              register.addr,
+              field.bits,
+              (event.target as HTMLInputElement).checked ? 1 : 0,
+            )
           }
         />
         <span className="bitfield-control__text">
@@ -156,7 +173,7 @@ export const BitFieldControl = ({ state, register, field, currentValue, onFieldC
         max={maxValue}
         value={selected}
         disabled={disabled}
-        onChange={event => onFieldChange(register.addr, field.bits, Number(event.target.value))}
+        onChange={(event) => onFieldChange(register.addr, field.bits, Number(event.target.value))}
       />
       <span className="bitfield-control__text">{formatHex(selected)}</span>
     </label>

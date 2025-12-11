@@ -1,9 +1,7 @@
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
-const isGitHubPages = process.env.GITHUB_REPOSITORY?.endsWith(
-  '/cc1101-configuration-tool',
-);
+const isGitHubPages = process.env.GITHUB_REPOSITORY?.endsWith('/cc1101-configuration-tool');
 
 export default defineConfig({
   plugins: [react()],

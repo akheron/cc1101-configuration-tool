@@ -6,19 +6,19 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   use: {
     baseURL: 'http://127.0.0.1:4174',
-    trace: 'on-first-retry'
+    trace: 'on-first-retry',
   },
   webServer: {
     command: 'npm run dev -- --host --port 4174',
     url: 'http://127.0.0.1:4174/',
     reuseExistingServer: !process.env.CI,
-    timeout: 120000
+    timeout: 120000,
   },
   // Chromium-only to keep runs fast and consistent in CI.
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] }
-    }
-  ]
+      use: { ...devices['Desktop Chrome'] },
+    },
+  ],
 });

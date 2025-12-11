@@ -17,7 +17,7 @@ describe('RegisterState', () => {
     state.initialize();
     expect(listener).toHaveBeenCalledWith(
       expect.objectContaining({ type: 'bulk-update', reason: 'initialize' }),
-      state
+      state,
     );
     expect(state.getValue(0x00)).toBe(RegisterTransforms.calculateResetValue(0x00));
   });
@@ -30,7 +30,7 @@ describe('RegisterState', () => {
     expect(state.getValue(0x0a)).toBe(0x12);
     expect(listener).toHaveBeenCalledWith(
       expect.objectContaining({ type: 'register-update', addr: 0x0a, value: 0x12 }),
-      state
+      state,
     );
   });
 
@@ -42,7 +42,7 @@ describe('RegisterState', () => {
     expect(state.getCrystalFreq()).toBe(27);
     expect(listener).toHaveBeenCalledWith(
       expect.objectContaining({ type: 'crystal-freq-update', freq: 27 }),
-      state
+      state,
     );
   });
 

@@ -68,7 +68,7 @@ export class RegisterState {
   }
 
   private notify(change: StateChange): void {
-    this.listeners.forEach(listener => {
+    this.listeners.forEach((listener) => {
       try {
         listener(change, this);
       } catch (error) {
@@ -83,7 +83,7 @@ export class RegisterState {
       this.getValue(0x0d),
       this.getValue(0x0e),
       this.getValue(0x0f),
-      this.crystalFreq
+      this.crystalFreq,
     );
   }
 
@@ -145,11 +145,14 @@ export class RegisterState {
     const config = FIELD_CONFIGS[bitsName];
     if (!config) return undefined;
     const options = this.resolveOptions(config);
-    const match = options?.find(opt => opt.value === value);
+    const match = options?.find((opt) => opt.value === value);
     return match?.desc;
   }
 
-  private resolveOptions(config: { options?: Option[] | (() => Option[]); getOptions?: (registers: RegisterValues, crystalFreqMHz: number) => Option[] }): Option[] | undefined {
+  private resolveOptions(config: {
+    options?: Option[] | (() => Option[]);
+    getOptions?: (registers: RegisterValues, crystalFreqMHz: number) => Option[];
+  }): Option[] | undefined {
     if (config.getOptions) {
       return config.getOptions(this.getAllValues(), this.getCrystalFreq());
     }

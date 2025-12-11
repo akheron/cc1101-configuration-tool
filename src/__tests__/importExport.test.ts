@@ -8,7 +8,7 @@ import {
   buildStateHash,
   parseStateHash,
   exportText,
-  importText
+  importText,
 } from '../ui/importExport';
 
 describe('import/export serialization', () => {
@@ -25,7 +25,7 @@ describe('import/export serialization', () => {
   it('serializes registers and filters unchanged when requested', () => {
     const values = {
       0x03: RegisterTransforms.calculateResetValue(0x03),
-      0x02: 0x2e
+      0x02: 0x2e,
     };
     const all = serializeRegisters(values, false);
     expect(all).toContain('(0x02, 0x2e)');
@@ -37,7 +37,7 @@ describe('import/export serialization', () => {
   it('builds and parses state hash roundtrip with read-only enforcement', () => {
     const values = {
       0x00: 0xff, // has read-only bits
-      0x03: 0xff
+      0x03: 0xff,
     };
     const hash = buildStateHash(values);
     const parsed = parseStateHash(hash);

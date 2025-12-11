@@ -30,5 +30,5 @@ export const RegisterTransforms = {
       }
     }
     return value & 0xff;
-  }
+  },
 };

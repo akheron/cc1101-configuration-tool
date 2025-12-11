@@ -9,16 +9,19 @@ A browser-based configuration tool for the TI CC1101 sub-GHz transceiver. Users 
 ## Commands
 
 ### Development
+
 - `npm run dev` - Start Vite dev server (default port or as configured)
 - `npm run build` - Production build to `dist/` (auto-detects GitHub Pages base path)
 - `npm run preview` - Preview production build locally
 
 ### Code Quality
+
 - `npm run type-check` - TypeScript type checking (`--noEmit`)
 - `npm run lint` - ESLint with flat config
 - `npm run format` / `npm run format:check` - Prettier formatting
 
 ### Testing
+
 - `npm run test` - Unit tests with Vitest + happy-dom
 - `npm run test:watch` - Vitest in watch mode
 - `npm run test:e2e` - Playwright e2e tests (Chromium only)
@@ -41,7 +44,9 @@ A browser-based configuration tool for the TI CC1101 sub-GHz transceiver. Users 
 ### Key Concepts
 
 #### RegisterState (Observer Pattern)
+
 The `RegisterState` class (`src/state/registerState.ts`) is the single source of truth for all register values. It:
+
 - Stores register values as `{ [addr: number]: number }`
 - Exposes `setValue()`, `getValue()`, `getAllValues()`, and `setCrystalFreq()`
 - Provides computed getters (e.g., `getBaseFrequency()`, `getCarrierFrequency()`, `getDataRate()`)
@@ -49,18 +54,22 @@ The `RegisterState` class (`src/state/registerState.ts`) is the single source of
 - **React integration**: `useRegisterState` hook wraps the state and triggers re-renders on changes
 
 #### Register Transforms
+
 Two critical transforms are applied to all register writes (see `src/logic/transforms.ts`):
+
 1. **`ensureFIFOTHRBit7Cleared(addr, value)`** - Ensures FIFOTHR register (0x03) bit 7 is always cleared (reserved bit must be 0)
 2. **`enforceReadOnlyFields(addr, value)`** - Prevents modification of read-only bitfields by preserving their reset values
 
 These transforms are applied in `App.tsx` whenever a register value is updated via UI or direct hex input.
 
 #### Import/Export Format
+
 - **Export**: `(0xAA, 0xBB)` format, one per line, sorted by address. Can filter to "only changed" registers.
 - **Import**: Parses lines matching `(0xAA, 0xBB)` regex; invalid lines are silently ignored.
 - **URL Hash**: State is encoded as `#0a:05;3e:c0;...` for sharing. Hash changes automatically rehydrate state.
 
 #### Summary Cards & Scrolling
+
 Summary cards at the top display derived values (frequency, data rate, etc.). Each card has a `data-scroll-to` attribute linking to the corresponding register. Clicking a summary item scrolls to the register card; if the register is filtered out, the filter is cleared first.
 
 ## Important Constraints
@@ -81,7 +90,9 @@ Summary cards at the top display derived values (frequency, data rate, etc.). Ea
 ## Development Workflow
 
 ### After Making Changes
+
 Always run the following commands to ensure code quality and prevent regressions:
+
 1. `npm run type-check` - Verify TypeScript types
 2. `npm run lint` - Check for linting errors
 3. `npm run format:check` - Verify code formatting (or `npm run format` to auto-fix)
@@ -89,5 +100,6 @@ Always run the following commands to ensure code quality and prevent regressions
 5. `npm run test:e2e` - Run e2e tests (optional but recommended for significant changes)
 
 ### Documentation Maintenance
+
 - Keep `README.md` up-to-date when adding features, changing scripts, or modifying the project structure
 - Keep `CLAUDE.md` up-to-date when changing architecture, adding new patterns, or introducing important constraints

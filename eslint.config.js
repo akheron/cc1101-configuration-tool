@@ -7,7 +7,7 @@ import eslintConfigPrettier from 'eslint-config-prettier';
 
 export default [
   {
-    ignores: ['dist', 'node_modules']
+    ignores: ['dist', 'node_modules'],
   },
   {
     files: ['**/*.{ts,tsx,js}'],
@@ -15,13 +15,13 @@ export default [
       parser: tsParser,
       parserOptions: {
         ecmaVersion: 'latest',
-        sourceType: 'module'
-      }
+        sourceType: 'module',
+      },
     },
     plugins: {
       '@typescript-eslint': tsPlugin,
       import: eslintPluginImport,
-      'unused-imports': unusedImports
+      'unused-imports': unusedImports,
     },
     rules: {
       ...js.configs.recommended.rules,
@@ -36,8 +36,8 @@ export default [
           vars: 'all',
           varsIgnorePattern: '^_',
           args: 'after-used',
-          argsIgnorePattern: '^_'
-        }
+          argsIgnorePattern: '^_',
+        },
       ],
       'import/first': 'error',
       'import/newline-after-import': ['error', { count: 1 }],
@@ -46,15 +46,15 @@ export default [
         {
           alphabetize: { order: 'asc', caseInsensitive: true },
           groups: [['builtin', 'external'], 'internal', ['parent', 'sibling', 'index']],
-          'newlines-between': 'always'
-        }
-      ]
+          'newlines-between': 'always',
+        },
+      ],
     },
     settings: {
       'import/resolver': {
-        node: true
-      }
-    }
+        node: true,
+      },
+    },
   },
-  eslintConfigPrettier
+  eslintConfigPrettier,
 ];

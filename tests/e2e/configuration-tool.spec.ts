@@ -38,7 +38,7 @@ test('export refresh lists defaults when not limited to changes', async ({ page 
   const onlyChanged = page.locator('#exportOnlyChanged');
   await onlyChanged.uncheck();
 
-   // Change a register so export clearly reflects current state.
+  // Change a register so export clearly reflects current state.
   const gdo2Input = page.locator('input[data-type="register-hex"][data-addr="0"]');
   await gdo2Input.fill('0x2A');
 

@@ -25,7 +25,7 @@ export const RegisterCalculations = {
       registers[0x0d] ?? 0,
       registers[0x0e] ?? 0,
       registers[0x0f] ?? 0,
-      crystalFreqMHz
+      crystalFreqMHz,
     );
     const channelSpacing = this.channelSpacing(registers, crystalFreqMHz);
     const channel = registers[0x0a] ?? 0;
@@ -164,7 +164,7 @@ export const RegisterCalculations = {
       0x30: -34.2,
       0x6e: -45.8,
       0x00: -59.3,
-      0x6f: -69.2
+      0x6f: -69.2,
     };
 
     const lookup915: Record<number, number> = {
@@ -178,10 +178,10 @@ export const RegisterCalculations = {
       0xcc: 7,
       0xc3: 10,
       0xc6: 8.9,
-      0xc0: 11
+      0xc0: 11,
     };
 
     const lookup = is868MHz ? lookup868 : lookup915;
     return lookup[patable0] ?? null;
-  }
+  },
 };
