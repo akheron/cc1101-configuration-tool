@@ -1,6 +1,10 @@
 # CC1101 Configuration Tool
 
-A modular Vite + TypeScript CC1101 configuration UI. Pure DOM (no framework) with typed register definitions, helpers, and tests.
+An in-browser configuration UI for the TI CC1101 sub-GHz transceiver.
+
+[Try it here!](https://akheron.github.io/cc1101-configuration-tool/)
+
+Entirely vibe coded.
 
 ## Getting Started
 
