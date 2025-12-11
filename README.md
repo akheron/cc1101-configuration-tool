@@ -3,7 +3,7 @@
 An in-browser UI for configuring the TI CC1101 sub-GHz transceiver registers.
 
 - Live app: https://akheron.github.io/cc1101-configuration-tool/
-- Built with Vite + TypeScript; deploys to GitHub Pages.
+- Built with Vite + React + TypeScript; deploys to GitHub Pages.
 - Entirely vibe coded.
 
 ## Features
@@ -44,7 +44,7 @@ Then open the printed local URL (Vite dev server).
 - `src/config` – field config metadata
 - `src/logic` – pure helpers (bitfields, transforms, calculations)
 - `src/state` – `RegisterState` with observers and computed getters
-- `src/ui` – DOM rendering, event wiring, import/export helpers
+- `src/ui` – React components and UI helpers (import/export lives here)
 - `src/styles` – base styling
 - `public/index.html` / `index.html` – HTML shells for dev/build
 
