@@ -33,7 +33,8 @@ test('editing channel number updates the summary', async ({ page }) => {
 
 test('export refresh lists defaults when not limited to changes', async ({ page }) => {
   const exportText = page.locator('#exportText');
-  await expect(exportText).toHaveValue('');
+  // Export should start with URL comment even when "only changed" shows no registers
+  await expect(exportText).toHaveValue(/^\/\/ https:\/\//);
 
   const onlyChanged = page.locator('#exportOnlyChanged');
   await onlyChanged.uncheck();

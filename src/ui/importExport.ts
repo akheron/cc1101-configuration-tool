@@ -84,7 +84,11 @@ export function saveToURL(values: RegisterValues, onlyChanged = false): void {
 }
 
 export function exportText(state: RegisterState, onlyChanged: boolean): string {
-  return serializeRegisters(state.getAllValues(), onlyChanged);
+  const values = state.getAllValues();
+  const hash = buildStateHash(values, onlyChanged);
+  const url = `https://akheron.github.io/cc1101-configuration-tool/${hash}`;
+  const serialized = serializeRegisters(values, onlyChanged);
+  return `// ${url}\n${serialized}`;
 }
 
 export function importText(state: RegisterState, text: string): number {
